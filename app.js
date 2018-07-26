@@ -13,7 +13,7 @@ var scores , roundScore, activePlayer, dice;
 
 scores = [0, 0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
 //dice roll value 0-6
 dice = Math.floor(Math.random() * 6) + 1;
@@ -29,6 +29,11 @@ console.log(dice);
 //hiding elements on webside
 document.querySelector('.dice').style.display = 'none';
 
+// wyzerowanie wyniku
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
 
 //how to make anonimus function
 
@@ -36,12 +41,94 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     
  // 1. Random number 
     
-    dice = Math.floor(Math.random() * 6) + 1;
+ var dice = Math.floor(Math.random() * 6) + 1;
  
 //  2. Display the result
     var diceDOM = document.querySelector('.dice');
     diceDOM.style.display = 'block';
     diceDOM.src = 'dice-' + dice + '.png';
     
-//  3. Update the round score IF the rolled number was NOT 1    
+    
+//  3. Update the round score IF the rolled number was NOT 1 
+   if(dice !== 1) {
+       //Add score
+       roundScore += dice;
+       document.querySelector('#current-' + activePlayer).textContent = roundScore;
+   }else {
+       //Next player
+       activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+       roundScore = 0;
+       document.getElementById('current-0').textContent = '0';
+       document.getElementById('current-1').textContent = '0';
+       
+       document.querySelector('.player-0-panel').classList.toggle('active');
+       document.querySelector('.player-1-panel').classList.toggle('active');
+
+       //document.querySelector('.player-0-panel').classList.remove('active');
+       //document.querySelector('.player-1-panel').classList.add('active');
+       
+       document.querySelector('.dice').style.display = 'none';
+   }
+    
+    
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
